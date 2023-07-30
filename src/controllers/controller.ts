@@ -10,8 +10,14 @@ function createTicketController(
     return async (req: Request, res: Response) => {
         const { id } = req.query;
         const eventId = new EventId(id);
-        const tickets = await ticketService.getEventTickets(eventId);
-        res.json(tickets);
+        try {
+            const tickets = await ticketService.getEventTickets(eventId);
+            res.json(tickets);
+        } catch (e) {
+            res.status(400).json({
+                error: e,
+            });
+        }
     };
 }
 

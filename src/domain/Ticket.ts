@@ -1,6 +1,6 @@
 export interface Ticket {
     section: string;
-    row: number;
+    row: string;
     seatNumber: number;
     price: number;
 }

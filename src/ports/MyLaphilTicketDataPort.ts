@@ -6,8 +6,8 @@ export interface Seat {
     Id: number;
     ZoneId: number;
     SeatStatusId: number;
-    SeatRow: number;
-    SeatNumber: number;
+    SeatRow: string;
+    SeatNumber: string;
 }
 export interface PerformanceZonePrices {
     ZoneId: number;

@@ -6,11 +6,16 @@ import { TicketServicePort } from "../ports/TicketServicePort";
 export class MyLaphilPackageTicketServiceAdapter implements TicketServicePort {
     constructor(private ticketDataAdapter: MyLaphilTicketDataPort) {}
     async getEventTickets(eventId: EventId): Promise<Ticket[]> {
+        if (eventId.id != parseInt(eventId.id)) {
+            throw Error("Event id is not a number");
+        }
         console.log("Requesting tickets for event with id " + eventId.id);
         const startTime = Date.now();
         const performanceZonePrices =
             await this.ticketDataAdapter.getPerformanceZonePrices(eventId.id);
-
+        if (performanceZonePrices.length == 0) {
+            throw Error("Event with this id doesn't exist");
+        }
         const packageZonePrices = performanceZonePrices.filter(
             (el) => el.PerformanceId == 0 // PerformanceId = 0 <=> gives total price for ticket package
         );
@@ -42,7 +47,7 @@ export class MyLaphilPackageTicketServiceAdapter implements TicketServicePort {
                 section,
                 price,
                 row: seat.SeatRow,
-                seatNumber: seat.SeatNumber,
+                seatNumber: parseInt(seat.SeatNumber),
             } as Ticket;
         });
         console.log("Total ticket count " + availableTickets.length);
