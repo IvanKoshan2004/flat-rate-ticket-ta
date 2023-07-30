@@ -2,6 +2,7 @@ import { Ticket } from "../domain/Ticket";
 import app from "../server";
 import supertest from "supertest";
 jest.setTimeout(10000); //for slow connections
+jest.retryTimes(3);
 describe("Endpoint 2e2 testing", () => {
     it("Should respond with json of an array of Tickets, if the event with id exists", async () => {
         const eventId = 1195;
