@@ -1,5 +1,8 @@
 import express from "express";
-import router from "./routes/router";
-const server = express();
-server.use(router);
-export default server;
+import createRouter from "./routes/router";
+
+export default async function createServer() {
+    const server = express();
+    server.use(await createRouter());
+    return server;
+}

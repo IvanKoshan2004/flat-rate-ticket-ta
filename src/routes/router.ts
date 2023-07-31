@@ -1,6 +1,12 @@
 import { Router } from "express";
-import { getPackageTicketsFromMyLaphil as getTicketsFromMyLaphilEvent } from "../controllers/controller";
-const router = Router();
-router.get("/api", getTicketsFromMyLaphilEvent);
+import {
+    getGraphQLPackageTicketsFromMyLaphil,
+    getPackageTicketsFromMyLaphil,
+} from "../controllers/controller";
 
-export default router;
+export default async function createRouter() {
+    const router = Router();
+    router.get("/api", getPackageTicketsFromMyLaphil);
+    router.post("/graphql", await getGraphQLPackageTicketsFromMyLaphil);
+    return router;
+}

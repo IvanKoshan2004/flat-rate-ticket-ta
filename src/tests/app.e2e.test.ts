@@ -1,9 +1,14 @@
 import { Ticket } from "../domain/Ticket";
-import app from "../server";
+import createServer from "../server";
 import supertest from "supertest";
+import { Express } from "express";
 jest.setTimeout(10000); //for slow connections
 jest.retryTimes(3);
 describe("Endpoint 2e2 testing", () => {
+    let app!: Express;
+    beforeEach(async () => {
+        app = await createServer();
+    });
     it("Should respond with json of an array of Tickets, if the event with id exists", async () => {
         const eventId = 1195;
         const res = await supertest(app).get(`/api?id=${eventId}`);
