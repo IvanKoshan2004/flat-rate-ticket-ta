@@ -31,4 +31,8 @@ describe("Endpoint 2e2 testing", () => {
         const res = await supertest(app).get(`/api?id=${eventId}`);
         expect(res.statusCode).toEqual(400);
     });
+    it("Should respond with Bad Request (code: 400) if the id query param is unspecified", async () => {
+        const res = await supertest(app).get(`/api`);
+        expect(res.statusCode).toEqual(400);
+    });
 });
