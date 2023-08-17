@@ -45,8 +45,6 @@
         "transform": {
             "^.+\\.tsx?$": "ts-jest"
         },
-        "setupFilesAfterEnv": [
-            "./src/tests/test-setup.ts"
-        ]
+        "rootDir": "./src"
     }
 }
