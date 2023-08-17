@@ -1,10 +1,16 @@
-import { EventId } from "../domain/EventId";
-import { Ticket } from "../domain/Ticket";
-import { MyLaphilTicketDataPort, Zone } from "../ports/MyLaphilTicketDataPort";
-import { TicketServicePort } from "../ports/TicketServicePort";
+import { Injectable } from "@nestjs/common";
+import { EventId } from "../../../domain/event-id.class";
+import { Ticket } from "../../../domain/ticket.interface";
+import {
+    MyLaphilTicketDataPort,
+    Zone,
+} from "../ports/mylaphil-ticket-data.port";
+import { TicketServicePort } from "../../ticket-service.port";
 
+@Injectable()
 export class MyLaphilPackageTicketServiceAdapter implements TicketServicePort {
     constructor(private ticketDataAdapter: MyLaphilTicketDataPort) {}
+
     async getEventTickets(eventId: EventId): Promise<Ticket[]> {
         if (eventId.id != parseInt(eventId.id)) {
             throw Error("Event id is not a number");

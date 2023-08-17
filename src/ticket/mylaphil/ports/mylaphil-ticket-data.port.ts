@@ -15,8 +15,10 @@ export interface PerformanceZonePrices {
     Price: number;
 }
 
-export interface MyLaphilTicketDataPort {
-    getZones(performanceId: number): Promise<Zone[]>;
-    getSeats(eventId: number): Promise<Seat[]>;
-    getPerformanceZonePrices(eventId: number): Promise<PerformanceZonePrices[]>;
+export abstract class MyLaphilTicketDataPort {
+    abstract getZones(performanceId: number): Promise<Zone[]>;
+    abstract getSeats(eventId: number): Promise<Seat[]>;
+    abstract getPerformanceZonePrices(
+        eventId: number
+    ): Promise<PerformanceZonePrices[]>;
 }

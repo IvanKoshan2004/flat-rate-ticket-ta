@@ -1,10 +1,12 @@
+import { Injectable } from "@nestjs/common";
 import {
     MyLaphilTicketDataPort,
     PerformanceZonePrices,
     Seat,
     Zone,
-} from "../ports/MyLaphilTicketDataPort";
+} from "../ports/mylaphil-ticket-data.port";
 
+@Injectable()
 export class MyLaphilPackageTicketDataAdapter
     implements MyLaphilTicketDataPort
 {
